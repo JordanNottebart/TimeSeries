@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using MyExcelApp = Microsoft.Office.Interop.Excel;
 
 
 namespace TimeSeries
@@ -92,33 +94,61 @@ namespace TimeSeries
         private System.Windows.Forms.ListBox output;
 
 
-        public void ReadInputTXT(string path, string name)
+        public void ReadInputTXT(string path)
         {
             output.Items.Clear();
-            string[] fileInput = File.ReadLines(path + name).ToArray();
+            string[] fileInput = File.ReadLines(path).ToArray();
             foreach (string line in fileInput)
             {
                 output.Items.Add(line);
             }
         }
 
-        public void ReadInputCSV(string path, string name)
+        public void ReadInputCSV(string path)
         {
             output.Items.Clear();
-            string[] fileInput = File.ReadLines(path + name).ToArray();
+            string[] fileInput = File.ReadLines(path).ToArray();
             foreach (string line in fileInput)
             {
                 output.Items.Add(line);
             }
         }
 
-        public void ReadInputXLS(string path, string name)
+        public void ReadInputXLS(string path)
         {
 
         }
 
-        public void ReadInputXLSX(string path, string name)
+        public void ReadInputXLSX(string path)
         {
+            FileInfo aFile;
+            MyExcelApp.Application theExcelApplication;
+            MyExcelApp.Workbook theWorkbook;
+            MyExcelApp.Worksheet theWorksheet;
+            MyExcelApp.Range theRange;
+            MyExcelApp.Range theCell;
+            aFile = new FileInfo(path);
+            theExcelApplication = new MyExcelApp.Application();   // Make a new excel application
+
+            theExcelApplication.Visible = true;   // Show the excel file or not
+            theWorkbook = theExcelApplication.Workbooks.Open(aFile.FullName);   // Define the workbook
+            theWorksheet = theWorkbook.Worksheets[1];   // Define the worksheet you are using
+            theRange = theWorksheet.UsedRange;   // Define the range used
+            List<string> fileInput = new List<string>();
+            for (int RowCounter = 1; RowCounter <= theRange.Rows.Count; RowCounter++)   // Show the value of each used cell, row after row
+            {
+                string[] rowsInput = new string[3];
+                //for (int ColumnCounter = 1; ColumnCounter <= theRange.Columns.Count; ColumnCounter++)
+                //{
+                //    theCell = theRange.Cells[RowCounter, ColumnCounter];
+
+                //}
+                rowsInput[0] = theRange.Rows[RowCounter,1];
+                rowsInput[1] = theRange.Rows[RowCounter,2];
+                rowsInput[2] = theRange.Rows[RowCounter,3];
+            }
+
+            theExcelApplication.Quit();
 
         }
 
