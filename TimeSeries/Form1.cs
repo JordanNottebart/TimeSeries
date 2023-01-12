@@ -21,5 +21,10 @@ namespace TimeSeries
         {
 
         }
+
+        private void openFile_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
