@@ -126,7 +126,6 @@ namespace TimeSeries
             MyExcelApp.Workbook theWorkbook;
             MyExcelApp.Worksheet theWorksheet;
             MyExcelApp.Range theRange;
-            MyExcelApp.Range theCell;
             aFile = new FileInfo(path);
             theExcelApplication = new MyExcelApp.Application();   // Make a new excel application
 
@@ -143,9 +142,9 @@ namespace TimeSeries
                 //    theCell = theRange.Cells[RowCounter, ColumnCounter];
 
                 //}
-                rowsInput[0] = theRange.Rows[RowCounter,1];
-                rowsInput[1] = theRange.Rows[RowCounter,2];
-                rowsInput[2] = theRange.Rows[RowCounter,3];
+                rowsInput[0] = theRange.Rows[RowCounter,1].Value;
+                rowsInput[1] = theRange.Rows[RowCounter,2].Value;
+                rowsInput[2] = theRange.Rows[RowCounter,3].Value;
             }
 
             theExcelApplication.Quit();
