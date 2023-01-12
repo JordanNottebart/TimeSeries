@@ -53,7 +53,10 @@ namespace TimeSeries
                     Program.application.ReadInputXLS_XLSX(theFile.FullName);
                 } 
             }
-            //mss error catch?
+            else
+            {
+                output.Items.Add("Error 404 file not found");
+            }
         }
     }
 }

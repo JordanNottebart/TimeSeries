@@ -44,7 +44,7 @@ namespace TimeSeries
             // openFile
             // 
             this.openFile.Location = new System.Drawing.Point(22, 81);
-            this.openFile.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.openFile.Margin = new System.Windows.Forms.Padding(6);
             this.openFile.Name = "openFile";
             this.openFile.Size = new System.Drawing.Size(184, 63);
             this.openFile.TabIndex = 0;
@@ -57,7 +57,7 @@ namespace TimeSeries
             this.output.FormattingEnabled = true;
             this.output.ItemHeight = 37;
             this.output.Location = new System.Drawing.Point(249, 183);
-            this.output.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.output.Margin = new System.Windows.Forms.Padding(6);
             this.output.Name = "output";
             this.output.Size = new System.Drawing.Size(865, 374);
             this.output.TabIndex = 1;
@@ -65,7 +65,7 @@ namespace TimeSeries
             // pathofthefile
             // 
             this.pathofthefile.Location = new System.Drawing.Point(249, 89);
-            this.pathofthefile.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pathofthefile.Margin = new System.Windows.Forms.Padding(6);
             this.pathofthefile.Name = "pathofthefile";
             this.pathofthefile.Size = new System.Drawing.Size(865, 43);
             this.pathofthefile.TabIndex = 2;
@@ -89,7 +89,7 @@ namespace TimeSeries
             this.Controls.Add(this.pathofthefile);
             this.Controls.Add(this.output);
             this.Controls.Add(this.openFile);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Click += new System.EventHandler(this.Form1_Click);
