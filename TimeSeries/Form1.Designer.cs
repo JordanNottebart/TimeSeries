@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 
 namespace TimeSeries
@@ -81,6 +78,8 @@ namespace TimeSeries
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Click += new System.EventHandler(this.Form1_Click);
+            this.DoubleClick += new System.EventHandler(this.Form1_DoubleClick);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -93,8 +92,9 @@ namespace TimeSeries
         private System.Windows.Forms.ListBox output;
 
 
-        public  void ReadInputTXT(string path, string name)
+        public void ReadInputTXT(string path, string name)
         {
+            output.Items.Clear();
             string[] fileInput = File.ReadLines(path + name).ToArray();
             foreach (string line in fileInput)
             {
@@ -102,8 +102,9 @@ namespace TimeSeries
             }
         }
 
-        public  void ReadInputCSV(string path, string name)
+        public void ReadInputCSV(string path, string name)
         {
+            output.Items.Clear();
             string[] fileInput = File.ReadLines(path + name).ToArray();
             foreach (string line in fileInput)
             {
@@ -111,12 +112,12 @@ namespace TimeSeries
             }
         }
 
-        public  void ReadInputXLS(string path, string name)
+        public void ReadInputXLS(string path, string name)
         {
 
         }
 
-        public  void ReadInputXLSX(string path, string name)
+        public void ReadInputXLSX(string path, string name)
         {
 
         }

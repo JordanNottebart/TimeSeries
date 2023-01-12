@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TimeSeries
@@ -25,6 +18,17 @@ namespace TimeSeries
         private void openFile_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Form1_Click(object sender, EventArgs e)
+        {
+
+            Program.application.ReadInputTXT("C:\\Users\\miar0\\Downloads\\", "examenvragen.txt");
+        }
+
+        private void Form1_DoubleClick(object sender, EventArgs e)
+        {
+            Program.application.ReadInputCSV("C:\\Users\\miar0\\Downloads\\", "output-onlinerandomtools.txt");
         }
     }
 }
