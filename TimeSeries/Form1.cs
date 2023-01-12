@@ -31,12 +31,29 @@ namespace TimeSeries
         private void Form1_Click(object sender, EventArgs e)
         {
 
-            Program.application.ReadInputTXT("C:\\Users\\miar0\\Downloads\\", "examenvragen.txt");
         }
 
         private void Form1_DoubleClick(object sender, EventArgs e)
         {
-            Program.application.ReadInputCSV("C:\\Users\\miar0\\Downloads\\", "output-onlinerandomtools.txt");
+
+        }
+
+        private void btn_ExecuteRead_Click(object sender, EventArgs e)
+        {
+            FileInfo theFile = new FileInfo(pathofthefile.Text);
+
+            if (theFile.Exists)
+            {
+                if (theFile.Extension == ".txt" || theFile.Extension == ".csv")
+                {
+                    Program.application.ReadInputTXT_CSV(theFile.FullName);
+                }
+                else
+                {
+                    Program.application.ReadInputXLS_XLSX(theFile.FullName);
+                } 
+            }
+            //mss error catch?
         }
     }
 }

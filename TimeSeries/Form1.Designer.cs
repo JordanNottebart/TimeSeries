@@ -38,13 +38,15 @@ namespace TimeSeries
             this.openFile = new System.Windows.Forms.Button();
             this.output = new System.Windows.Forms.ListBox();
             this.pathofthefile = new System.Windows.Forms.TextBox();
+            this.btn_ExecuteRead = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // openFile
             // 
-            this.openFile.Location = new System.Drawing.Point(12, 44);
+            this.openFile.Location = new System.Drawing.Point(22, 81);
+            this.openFile.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.openFile.Name = "openFile";
-            this.openFile.Size = new System.Drawing.Size(98, 34);
+            this.openFile.Size = new System.Drawing.Size(184, 63);
             this.openFile.TabIndex = 0;
             this.openFile.Text = "Browse";
             this.openFile.UseVisualStyleBackColor = true;
@@ -53,27 +55,41 @@ namespace TimeSeries
             // output
             // 
             this.output.FormattingEnabled = true;
-            this.output.ItemHeight = 20;
-            this.output.Location = new System.Drawing.Point(133, 99);
+            this.output.ItemHeight = 37;
+            this.output.Location = new System.Drawing.Point(249, 183);
+            this.output.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.output.Name = "output";
-            this.output.Size = new System.Drawing.Size(463, 204);
+            this.output.Size = new System.Drawing.Size(865, 374);
             this.output.TabIndex = 1;
             // 
             // pathofthefile
             // 
-            this.pathofthefile.Location = new System.Drawing.Point(133, 48);
+            this.pathofthefile.Location = new System.Drawing.Point(249, 89);
+            this.pathofthefile.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.pathofthefile.Name = "pathofthefile";
-            this.pathofthefile.Size = new System.Drawing.Size(463, 27);
+            this.pathofthefile.Size = new System.Drawing.Size(865, 43);
             this.pathofthefile.TabIndex = 2;
+            // 
+            // btn_ExecuteRead
+            // 
+            this.btn_ExecuteRead.Location = new System.Drawing.Point(37, 183);
+            this.btn_ExecuteRead.Name = "btn_ExecuteRead";
+            this.btn_ExecuteRead.Size = new System.Drawing.Size(169, 52);
+            this.btn_ExecuteRead.TabIndex = 3;
+            this.btn_ExecuteRead.Text = "Read";
+            this.btn_ExecuteRead.UseVisualStyleBackColor = true;
+            this.btn_ExecuteRead.Click += new System.EventHandler(this.btn_ExecuteRead_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1500, 832);
+            this.Controls.Add(this.btn_ExecuteRead);
             this.Controls.Add(this.pathofthefile);
             this.Controls.Add(this.output);
             this.Controls.Add(this.openFile);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Click += new System.EventHandler(this.Form1_Click);
@@ -90,7 +106,7 @@ namespace TimeSeries
         private System.Windows.Forms.ListBox output;
 
 
-        public void ReadInputTXT(string path)
+        public void ReadInputTXT_CSV(string path)
         {
             output.Items.Clear();
             string[] fileInput = File.ReadLines(path).ToArray();
@@ -100,22 +116,22 @@ namespace TimeSeries
             }
         }
 
-        public void ReadInputCSV(string path)
-        {
-            output.Items.Clear();
-            string[] fileInput = File.ReadLines(path).ToArray();
-            foreach (string line in fileInput)
-            {
-                output.Items.Add(line);
-            }
-        }
+        //public void ReadInputCSV(string path)
+        //{
+        //    output.Items.Clear();
+        //    string[] fileInput = File.ReadLines(path).ToArray();
+        //    foreach (string line in fileInput)
+        //    {
+        //        output.Items.Add(line);
+        //    }
+        //}
 
-        public void ReadInputXLS(string path)
-        {
+        //public void ReadInputXLS(string path)
+        //{
 
-        }
+        //}
 
-        public void ReadInputXLSX(string path)
+        public void ReadInputXLS_XLSX(string path)
         {
             FileInfo aFile;
             MyExcelApp.Application theExcelApplication;
@@ -147,7 +163,7 @@ namespace TimeSeries
 
         }
 
-
+        private System.Windows.Forms.Button btn_ExecuteRead;
     }
 }
 
