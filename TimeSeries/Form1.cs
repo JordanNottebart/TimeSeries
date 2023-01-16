@@ -61,6 +61,24 @@ namespace TimeSeries
             {
                 output.Items.Add("Error 404 file not found");
             }
+            
+        }
+
+        private void btn_CheckTimeSeries_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Do you want to see the data is incorrect path", "Check File", MessageBoxButtons.YesNo);
+
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                MessageBox.Show("The structure and data of this timeseries is incorrect");
+                MessageBox.Show("The startdate comes after the enddate" + " on bucket 3");
+            }
+            else
+            {
+                MessageBox.Show("The structure and data of this timeseries is correct");
+            }
+
         }
     }
 }

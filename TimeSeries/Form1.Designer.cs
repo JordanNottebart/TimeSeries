@@ -39,6 +39,7 @@ namespace TimeSeries
             this.output = new System.Windows.Forms.ListBox();
             this.pathofthefile = new System.Windows.Forms.TextBox();
             this.btn_ExecuteRead = new System.Windows.Forms.Button();
+            this.btn_CheckTimeSeries = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // openFile
@@ -80,11 +81,22 @@ namespace TimeSeries
             this.btn_ExecuteRead.UseVisualStyleBackColor = true;
             this.btn_ExecuteRead.Click += new System.EventHandler(this.btn_ExecuteRead_Click);
             // 
+            // btn_CheckTimeSeries
+            // 
+            this.btn_CheckTimeSeries.Location = new System.Drawing.Point(37, 265);
+            this.btn_CheckTimeSeries.Name = "btn_CheckTimeSeries";
+            this.btn_CheckTimeSeries.Size = new System.Drawing.Size(169, 52);
+            this.btn_CheckTimeSeries.TabIndex = 4;
+            this.btn_CheckTimeSeries.Text = "check";
+            this.btn_CheckTimeSeries.UseVisualStyleBackColor = true;
+            this.btn_CheckTimeSeries.Click += new System.EventHandler(this.btn_CheckTimeSeries_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1500, 832);
+            this.Controls.Add(this.btn_CheckTimeSeries);
             this.Controls.Add(this.btn_ExecuteRead);
             this.Controls.Add(this.pathofthefile);
             this.Controls.Add(this.output);
@@ -105,6 +117,7 @@ namespace TimeSeries
         private System.Windows.Forms.TextBox pathofthefile;
         public System.Windows.Forms.ListBox output;
         private System.Windows.Forms.Button btn_ExecuteRead;
+        private System.Windows.Forms.Button btn_CheckTimeSeries;
     }
 }
 
