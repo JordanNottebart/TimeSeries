@@ -40,6 +40,7 @@ namespace TimeSeries
 
         private void btn_ExecuteRead_Click(object sender, EventArgs e)
         {
+            
             FileInfo theFile = new FileInfo(pathofthefile.Text);
 
             if (theFile.Exists)
