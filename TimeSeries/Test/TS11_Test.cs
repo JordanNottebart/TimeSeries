@@ -6,6 +6,8 @@ namespace TimeSeries
 {
     public class TS11_Test : TS_ITest
     {
+        BucketList timeSeries;
+
 
     }
 }
