@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using MyExcelApp = Microsoft.Office.Interop.Excel;
 
 
 namespace TimeSeries
@@ -39,6 +38,7 @@ namespace TimeSeries
             this.openFile = new System.Windows.Forms.Button();
             this.output = new System.Windows.Forms.ListBox();
             this.pathofthefile = new System.Windows.Forms.TextBox();
+            this.btn_ExecuteRead = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // openFile
@@ -48,7 +48,7 @@ namespace TimeSeries
             this.openFile.Name = "openFile";
             this.openFile.Size = new System.Drawing.Size(184, 63);
             this.openFile.TabIndex = 0;
-            this.openFile.Text = "button1";
+            this.openFile.Text = "Browse";
             this.openFile.UseVisualStyleBackColor = true;
             this.openFile.Click += new System.EventHandler(this.openFile_Click);
             // 
@@ -70,17 +70,30 @@ namespace TimeSeries
             this.pathofthefile.Size = new System.Drawing.Size(865, 43);
             this.pathofthefile.TabIndex = 2;
             // 
+            // btn_ExecuteRead
+            // 
+            this.btn_ExecuteRead.Location = new System.Drawing.Point(37, 183);
+            this.btn_ExecuteRead.Name = "btn_ExecuteRead";
+            this.btn_ExecuteRead.Size = new System.Drawing.Size(169, 52);
+            this.btn_ExecuteRead.TabIndex = 3;
+            this.btn_ExecuteRead.Text = "Read";
+            this.btn_ExecuteRead.UseVisualStyleBackColor = true;
+            this.btn_ExecuteRead.Click += new System.EventHandler(this.btn_ExecuteRead_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1500, 832);
+            this.Controls.Add(this.btn_ExecuteRead);
             this.Controls.Add(this.pathofthefile);
             this.Controls.Add(this.output);
             this.Controls.Add(this.openFile);
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Click += new System.EventHandler(this.Form1_Click);
+            this.DoubleClick += new System.EventHandler(this.Form1_DoubleClick);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -90,41 +103,8 @@ namespace TimeSeries
 
         private System.Windows.Forms.Button openFile;
         private System.Windows.Forms.TextBox pathofthefile;
-        private System.Windows.Forms.ListBox output;
-
-
-        public  void ReadInputTXT(string path, string name)
-        {
-            string[] fileInput = File.ReadLines(path + name).ToArray();
-            foreach (string line in fileInput)
-            {
-                output.Items.Add(line);
-            }
-        }
-
-        public  void ReadInputCSV(string path, string name)
-        {
-            string[] fileInput = File.ReadLines(path + name).ToArray();
-            foreach (string line in fileInput)
-            {
-                output.Items.Add(line);
-            }
-        }
-
-        public  void ReadInputXLS(string path, string name)
-        {
-
-        }
-
-        public  void ReadInputXLSX(string path, string name)
-        {
-            
-
-        }
-
-
-
-
+        public System.Windows.Forms.ListBox output;
+        private System.Windows.Forms.Button btn_ExecuteRead;
     }
 }
 
