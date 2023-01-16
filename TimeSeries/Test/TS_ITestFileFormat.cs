@@ -4,8 +4,8 @@ using System.Text;
 
 namespace TimeSeries
 {
-    internal interface TS_ITest
+    internal interface TS_ITestFileFormat
     {
-        public string PerformTest(BucketList timesSeries);
+        public bool PerformTest(string[] splitstring);
     }
 }

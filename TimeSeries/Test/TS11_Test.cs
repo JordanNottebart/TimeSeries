@@ -4,10 +4,17 @@ using System.Text;
 
 namespace TimeSeries
 {
-    public class TS11_Test : TS_ITest
+    public class TS11_Test : TS_ITestFileFormat
     {
-        BucketList timeSeries;
 
+        public bool PerformTest(string[] splitstring)
+        {
+            if (splitstring.Length != 3)
+            {
+                return false;
+            }
 
+            return true;
+        }
     }
 }
