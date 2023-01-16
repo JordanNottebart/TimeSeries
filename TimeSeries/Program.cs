@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace TimeSeries
 {
-    static class Program
+    public static class Program
     {
         public static Form1 application = new Form1();
         /// <summary>

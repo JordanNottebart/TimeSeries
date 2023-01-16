@@ -103,66 +103,7 @@ namespace TimeSeries
 
         private System.Windows.Forms.Button openFile;
         private System.Windows.Forms.TextBox pathofthefile;
-        private System.Windows.Forms.ListBox output;
-
-
-        public void ReadInputTXT_CSV(string path)
-        {
-            output.Items.Clear();
-            string[] fileInput = File.ReadLines(path).ToArray();
-            foreach (string line in fileInput)
-            {
-                output.Items.Add(line);
-            }
-        }
-
-        //public void ReadInputCSV(string path)
-        //{
-        //    output.Items.Clear();
-        //    string[] fileInput = File.ReadLines(path).ToArray();
-        //    foreach (string line in fileInput)
-        //    {
-        //        output.Items.Add(line);
-        //    }
-        //}
-
-        //public void ReadInputXLS(string path)
-        //{
-
-        //}
-
-        public void ReadInputXLS_XLSX(string path)
-        {
-            FileInfo aFile;
-            MyExcelApp.Application theExcelApplication;
-            MyExcelApp.Workbook theWorkbook;
-            MyExcelApp.Worksheet theWorksheet;
-            MyExcelApp.Range theRange;
-            aFile = new FileInfo(path);
-            theExcelApplication = new MyExcelApp.Application();   // Make a new excel application
-
-            theExcelApplication.Visible = true;   // Show the excel file or not
-            theWorkbook = theExcelApplication.Workbooks.Open(aFile.FullName);   // Define the workbook
-            theWorksheet = theWorkbook.Worksheets[1];   // Define the worksheet you are using
-            theRange = theWorksheet.UsedRange;   // Define the range used
-            List<string> fileInput = new List<string>();
-            for (int RowCounter = 1; RowCounter <= theRange.Rows.Count; RowCounter++)   // Show the value of each used cell, row after row
-            {
-                string[] rowsInput = new string[3];
-                //for (int ColumnCounter = 1; ColumnCounter <= theRange.Columns.Count; ColumnCounter++)
-                //{
-                //    theCell = theRange.Cells[RowCounter, ColumnCounter];
-
-                //}
-                rowsInput[0] = theRange.Rows[RowCounter,1].Value;
-                rowsInput[1] = theRange.Rows[RowCounter,2].Value;
-                rowsInput[2] = theRange.Rows[RowCounter,3].Value;
-            }
-
-            theExcelApplication.Quit();
-
-        }
-
+        public System.Windows.Forms.ListBox output;
         private System.Windows.Forms.Button btn_ExecuteRead;
     }
 }
