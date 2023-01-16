@@ -118,23 +118,8 @@ namespace TimeSeries
 
         public  void ReadInputXLSX(string path, string name)
         {
-            theExcelApplication = new MyExcelApp.Application();   // Make a new excel application
+            
 
-            theExcelApplication.Visible = true;   // Show the excel file or not
-            theWorkbook = theExcelApplication.Workbooks.Open(aFile.FullName);   // Define the workbook
-            theWorksheet = theWorkbook.Worksheets[1];   // Define the worksheet you are using
-            theRange = theWorksheet.UsedRange;   // Define the range used
-
-            for (RowCounter = 1; RowCounter <= theRange.Rows.Count; RowCounter++)   // Show the value of each used cell, row after row
-            {
-                for (ColumnCounter = 1; ColumnCounter <= theRange.Columns.Count; ColumnCounter++)
-                {
-                    theCell = theRange.Cells[RowCounter, ColumnCounter];
-                    Console.WriteLine(theCell.Value);
-                }
-            }
-
-            theExcelApplication.Quit();   // Quit the application
         }
 
 
