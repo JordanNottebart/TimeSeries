@@ -17,12 +17,14 @@ namespace TimeSeries
 
         public void ReadFile()
         {
-               
+            
             Program.application.output.Items.Clear();
             string[] fileInput = File.ReadLines(TheFile.FullName).ToArray();
             foreach (string line in fileInput)
             {
+                
                 Program.application.output.Items.Add(line);
+
             }
         }
     }
