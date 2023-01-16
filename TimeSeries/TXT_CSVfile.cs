@@ -24,17 +24,18 @@ namespace TimeSeries
             {
                 
                 Program.application.output.Items.Add(line);
-                SplitWords(line);
+                //SplitWords(line);
             }
         }
 
         public void SplitWords(string aLine)
         {
             string[] words = aLine.Split(';');
-
+            //hier format test
             string startDate = words[0];
             string endDate = words[1];
             string strValue = words[2];
+            
 
             string[] startDateWords = startDate.Split('/');
             string[] endDateWords = endDate.Split('/');
