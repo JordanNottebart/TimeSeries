@@ -44,16 +44,18 @@ namespace TimeSeries
 
             if (theFile.Exists)
             {
+                TS_IFile tS_IFile;
                 if (theFile.Extension == ".txt" || theFile.Extension == ".csv")
                 {
-                    TS_IFile tS_IFile = new TXT_CSVfile(theFile);
-                    tS_IFile.ReadFile();
+                    tS_IFile = new TXT_CSVfile(theFile);
+                    
                 }
                 else
                 {
-                    TS_IFile tS_IFile = new XLS_XLSXfile(theFile);
-                    tS_IFile.ReadFile();
-                } 
+                    tS_IFile = new XLS_XLSXfile(theFile);
+                    
+                }
+                tS_IFile.ReadFile();
             }
             else
             {
