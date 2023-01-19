@@ -7,7 +7,7 @@ namespace TimeSeries
     struct Bucket//Struct
     {
         public DateTime startDate;
-        public DateTime endDate;        //Variabelen
+        public DateTime? endDate;        //Variabelen
         public string bucketValue;
 
     }
