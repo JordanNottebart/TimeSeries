@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Linq;
+using TimeSeries.Test;
 
 namespace TimeSeries
 {
@@ -18,21 +19,35 @@ namespace TimeSeries
         public void ReadFile()
         {
 
+            List<TS_ITestFileFormat> tests = new List<TS_ITestFileFormat>();
+            #region MakeTests
+            TS_ITestFileFormat test11_16 = new TS11_16_Test();
+            TS_ITestFileFormat test13 = new TS13_Test();
+            TS_ITestFileFormat test14 = new TS14_Test();
+            TS_ITestFileFormat test17 = new TS17_Test();
+            tests.Add(test11_16);
+            tests.Add(test13);
+            tests.Add(test14);
+            tests.Add(test17); 
+            #endregion
+
             Program.application.output.Items.Clear();
             string[] fileInput = File.ReadLines(TheFile.FullName).ToArray();
             for (int i = 1; i < fileInput.Length; i++)
             {
 
                 Program.application.output.Items.Add(fileInput[i]);
-                //SplitWords(line);
+                SplitWords(fileInput[i], tests);
             }
         }
 
-        public void SplitWords(string aLine)
+        public void SplitWords(string aLine, List<TS_ITestFileFormat> tests)
         {
             string[] words = aLine.Split(';');
             //hier format test
-            List<TS_ITestFileFormat> tests = new List<TS_ITestFileFormat>();
+
+            
+            
             bool formatIsGood = true;
             int index = 0;
             while (formatIsGood && index < tests.Count)
