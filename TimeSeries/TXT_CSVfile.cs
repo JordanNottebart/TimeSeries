@@ -28,20 +28,51 @@ namespace TimeSeries
             TS_ITestFileFormat test14 = new TS14_Test();
             TS_ITestFileFormat test17 = new TS17_Test();
             tests.Add(test11_16);
-            tests.Add(test13);
-            tests.Add(test14);
+            //tests.Add(test13);
+            //tests.Add(test14);
             tests.Add(test17);
+            List<TS_ITestFileFormat> testsHeader = new List<TS_ITestFileFormat>();
+            testsHeader.AddRange(tests);
+            testsHeader.Add(test13);
+            testsHeader.Add(test14);
+
             #endregion
 
             Program.application.output.Items.Clear();
             string[] fileInput = File.ReadLines(TheFile.FullName).ToArray();
-            for (int i = 1; i < fileInput.Length; i++)
+
+            for (int i = 0; i < fileInput.Length; i++)
             {
+                if (i<1)
+                {
+                    try
+                    {
+                        SplitWords(fileInput[i], testsHeader);
+                        Program.application.output.Items.Add("Checks gedaan voor " + i);
+                    }
+                    catch (Exception e)
+                    {
+                        System.Windows.Forms.MessageBox.Show(e.Message + i);
+                        i = fileInput.Length;
+                    }
+                }
 
                 //Program.application.output.Items.Add(fileInput[i]);
-                SplitWords(fileInput[i], tests);
+                else
+                {
+                    try
+                    {
+                        SplitWords(fileInput[i], tests);
+                        Program.application.output.Items.Add("Checks gedaan voor " + i);
+                    }
+                    catch (Exception e)
+                    {
+                        System.Windows.Forms.MessageBox.Show(e.Message + i);
+                        i = fileInput.Length;
+                    }
+                }
 
-                Program.application.output.Items.Add("Checks gedaan voor " + i);
+
 
             }
         }
@@ -69,7 +100,7 @@ namespace TimeSeries
              * anders gooien we een exception
              * 
              */
-            if (true)
+            if (formatIsGood)
             {
                 string startDate = words[0];
                 string endDate = words[1];
