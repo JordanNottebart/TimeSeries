@@ -60,6 +60,7 @@ namespace TimeSeries
             else
             {
                 throw new Exception();
+                //throw new test[index].Exception();
             }
 
 
