@@ -74,21 +74,10 @@ namespace TimeSeries
         public Bucket CreateBucket(string startDate, string endDate, string value)
         {
 
-            string[] startDateWords = startDate.Split('/');
-            string[] endDateWords = endDate.Split('/');
-
             try
             {
-                int startDateDay = Convert.ToInt32(startDateWords[0]);
-                int startDateMonth = Convert.ToInt32(startDateWords[1]);
-                int startDateYear = Convert.ToInt32(startDateWords[2]);
-
-                int endDateDay = Convert.ToInt32(endDateWords[0]);
-                int endDateMonth = Convert.ToInt32(endDateWords[1]);
-                int endDateYear = Convert.ToInt32(endDateWords[2]);
-
-                DateTime dtStartDate = new DateTime(startDateYear, startDateMonth, startDateDay);
-                DateTime dtEndDate = new DateTime(endDateYear, endDateMonth, endDateDay);
+                DateTime dtStartDate = DateTime.Parse(startDate);
+                DateTime dtEndDate = DateTime.Parse(endDate);
                 return Bucket.GetBucket(dtStartDate, dtEndDate, value);
             }
             catch
