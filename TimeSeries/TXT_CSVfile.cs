@@ -4,11 +4,13 @@ using System.Text;
 using System.IO;
 using System.Linq;
 using TimeSeries.Test;
+using System.Reflection;
 
 namespace TimeSeries
 {
     public class TXT_CSVfile : TS_IFile
     {
+
         public FileInfo TheFile { get; set; }
         public TXT_CSVfile(FileInfo theFile)
         {
@@ -28,7 +30,7 @@ namespace TimeSeries
             tests.Add(test11_16);
             tests.Add(test13);
             tests.Add(test14);
-            tests.Add(test17); 
+            tests.Add(test17);
             #endregion
 
             Program.application.output.Items.Clear();
@@ -36,8 +38,11 @@ namespace TimeSeries
             for (int i = 1; i < fileInput.Length; i++)
             {
 
-                Program.application.output.Items.Add(fileInput[i]);
+                //Program.application.output.Items.Add(fileInput[i]);
                 SplitWords(fileInput[i], tests);
+
+                Program.application.output.Items.Add("Checks gedaan voor " + i);
+
             }
         }
 
@@ -46,14 +51,14 @@ namespace TimeSeries
             string[] words = aLine.Split(';');
             //hier format test
 
-            
-            
-            bool formatIsGood = true;
+
             int index = 0;
+            bool formatIsGood = true;
             while (formatIsGood && index < tests.Count)
             {
                 formatIsGood = tests[index].PerformTest(words);
                 index++;
+
             }
             /*
              * Zorg ervoor dat je test false returned wanneer hij faalt
@@ -100,6 +105,6 @@ namespace TimeSeries
             {
                 return new Bucket();
             }
-        } 
+        }
     }
 }
