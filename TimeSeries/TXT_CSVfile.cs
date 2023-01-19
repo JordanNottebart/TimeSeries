@@ -17,13 +17,13 @@ namespace TimeSeries
 
         public void ReadFile()
         {
-            
+
             Program.application.output.Items.Clear();
             string[] fileInput = File.ReadLines(TheFile.FullName).ToArray();
-            foreach (string line in fileInput)
+            for (int i = 1; i < fileInput.Length; i++)
             {
-                
-                Program.application.output.Items.Add(line);
+
+                Program.application.output.Items.Add(fileInput[i]);
                 //SplitWords(line);
             }
         }
@@ -32,10 +32,47 @@ namespace TimeSeries
         {
             string[] words = aLine.Split(';');
             //hier format test
-            string startDate = words[0];
-            string endDate = words[1];
-            string strValue = words[2];
-            
+            List<TS_ITestFileFormat> tests = new List<TS_ITestFileFormat>();
+            bool formatIsGood = true;
+            int index = 0;
+            while (formatIsGood && index < tests.Count)
+            {
+                formatIsGood = tests[index].PerformTest(words);
+                index++;
+            }
+            /*
+             * Zorg ervoor dat je test false returned wanneer hij faalt
+             * hier lopen we door elke test totdat we enerzijds een false terug krijgen of
+             * we het einde van de lijst van testen terecht komen
+             * als de format goed blijft en we dus aan het einde van de lijst komen 
+             * maken we een bucket aan 
+             * anders gooien we een exception
+             * 
+             */
+            if (true)
+            {
+                string startDate = words[0];
+                string endDate = words[1];
+                string strValue = words[2];
+
+                Bucket bucket = CreateBucket(startDate, endDate, strValue);
+            }
+            else
+            {
+                throw new Exception();
+            }
+
+
+
+        }
+
+        public void SplitWordsTitleRow(string aLine)
+        {
+
+        }
+
+        public Bucket CreateBucket(string startDate, string endDate, string value)
+        {
 
             string[] startDateWords = startDate.Split('/');
             string[] endDateWords = endDate.Split('/');
@@ -52,14 +89,12 @@ namespace TimeSeries
 
                 DateTime dtStartDate = new DateTime(startDateYear, startDateMonth, startDateDay);
                 DateTime dtEndDate = new DateTime(endDateYear, endDateMonth, endDateDay);
-
+                return Bucket.GetBucket(dtStartDate, dtEndDate, value);
             }
             catch
             {
-                
+                return new Bucket();
             }
-
-
-        }
+        } 
     }
 }
