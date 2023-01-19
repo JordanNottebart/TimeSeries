@@ -8,7 +8,7 @@ namespace TimeSeries
     {
         public bool PerformTest(string[] titleRow)
         {
-            // Chech if the title of the first colmun in the title row is "end" (case insensitive)
+            // Check if the title of the second column in the title row is "end" (case insensitive)
             if (titleRow[1].ToLower() == "end")
             {
                 return true;
