@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TimeSeries
 {
-    internal interface TS_ITestFileFormat
+    public interface TS_ITestFileFormat
     {
         public bool PerformTest(string[] splitstring);
     }
