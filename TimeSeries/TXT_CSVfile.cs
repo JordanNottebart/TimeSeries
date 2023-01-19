@@ -45,6 +45,8 @@ namespace TimeSeries
             {
                 if (i<1)
                 {
+                    //dit test ook op TS12: Er is geen titelrij
+
                     try
                     {
                         SplitWords(fileInput[i], testsHeader);
