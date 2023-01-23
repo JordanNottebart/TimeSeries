@@ -4,13 +4,12 @@ using System.Text;
 
 namespace TimeSeries
 {
-    class BucketList
+    public class BucketList
     {
-        private List<Bucket> timeSeries;        //Variabele
-
+        private List<Bucket> timeSeries = new List<Bucket>();        //Variabele
+        public TitleBucket TitleBucket { get; set; }
         public BucketList()//Constructor
         {
-            TimeSeries = new List<Bucket>();
         }
         //Property
         public List<Bucket> TimeSeries

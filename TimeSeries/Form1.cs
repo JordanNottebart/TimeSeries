@@ -9,7 +9,42 @@ namespace TimeSeries
         public Form1()
         {
             InitializeComponent();
+            AllowDrop = true;
+            DragDrop += new DragEventHandler(pathofthefile_DragDrop);
+            DragEnter += new DragEventHandler(pathofthefile_DragEnter);
         }
+
+        void pathofthefile_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        void pathofthefile_DragDrop(object sender, DragEventArgs e)
+        {
+            DataObject data = (DataObject)e.Data;
+            if (data.ContainsFileDropList())
+            {
+                string[] rawFiles = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                if (rawFiles != null)
+                {
+                    foreach (string path in rawFiles)
+                    {
+                        string pathExtension = Path.GetExtension(path);
+
+                        if (pathExtension == ".txt" || pathExtension == ".csv" || pathExtension == ".xls" || pathExtension == ".xlsx")
+                        {
+                            pathofthefile.Text = path;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Not a Text File or CSV File!");
+                        }
+                    }
+                }
+            }
+        }
+
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -40,7 +75,7 @@ namespace TimeSeries
 
         private void btn_ExecuteRead_Click(object sender, EventArgs e)
         {
-            
+
             FileInfo theFile = new FileInfo(pathofthefile.Text);
 
             if (theFile.Exists)
@@ -49,12 +84,12 @@ namespace TimeSeries
                 if (theFile.Extension == ".txt" || theFile.Extension == ".csv")
                 {
                     tS_IFile = new TXT_CSVfile(theFile);
-                    
+
                 }
                 else
                 {
                     tS_IFile = new XLS_XLSXfile(theFile);
-                    
+
                 }
                 tS_IFile.ReadFile();
             }
@@ -62,7 +97,7 @@ namespace TimeSeries
             {
                 output.Items.Add("Error 404 file not found");
             }
-            
+
         }
 
         private void btn_CheckTimeSeries_Click(object sender, EventArgs e)
