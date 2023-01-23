@@ -4,7 +4,8 @@ using System.Text;
 
 namespace TimeSeries.Test
 {
-    public interface TS_ITestBucket//Interface om buckets te testen
+    public interface TS_ITestBucked
+        //Interface om buckets te testen
     {
         public bool PerformTestBucket(Bucket bucket);
     }
