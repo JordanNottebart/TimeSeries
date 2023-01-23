@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TimeSeries.Test
+namespace TimeSeries
 {
     class TS17_Test : TimeSeries.TS_ITestFileFormat
     {
