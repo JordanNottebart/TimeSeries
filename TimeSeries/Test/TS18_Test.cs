@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace TimeSeries.Test
+namespace TimeSeries
 {
     class TS18_Test : TS_ITestFileFormat
     {

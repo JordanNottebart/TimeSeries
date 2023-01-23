@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+using System.Windows.Forms;
 
 namespace TimeSeries
 {
@@ -28,12 +28,15 @@ namespace TimeSeries
             TS_ITestFileFormat test14 = new TS14_Test();
             TS_ITestFileFormat test12 = new TS12_Test();
             TS_ITestFileFormat test17 = new TS17_Test();
+            TS_ITestFileFormat test18 = new TS18_Test();
             tests.Add(test11_16);
             tests.Add(test17);
             testsHeader.Add(test12);
             testsHeader.AddRange(tests);
             testsHeader.Add(test13);
             testsHeader.Add(test14);
+            tests.Add(test18);
+            
 
             #endregion
 
@@ -66,7 +69,7 @@ namespace TimeSeries
                 #endregion
 
                 SplitWords(fileInput[_lineIndex], tests);
-                Program.application.output.Items.Add("Checks gedaan voor " + _lineIndex);
+                //Program.application.output.Items.Add("Checks gedaan voor " + _lineIndex);
 
 
                 //}
@@ -81,23 +84,21 @@ namespace TimeSeries
 
         public void CheckAllBuckets()//Method om buckets te checken
         {
-            List<TS_ITestBucket> testBuckets = new List<TS_ITestBucket>();//Maak een lijst
-            TS_ITestBucket test18 = new TS18_Test();//Maak de test aan
-            testBuckets.Add(test18);//voeg de testen toe
-            i = 0;
+            List<TS_ITestBucked> testBuckets = new List<TS_ITestBucked>();//Maak een lijst
+            _lineIndex = 0;
             int index = 0;
             bool bucketIsGood = true;
-            for (; i < TimeSeries.TimeSeries.Count; i++)//Zolang i kleiner is dan timeseries
+            for (; _lineIndex < TimeSeries.TimeSeries.Count; _lineIndex++)//Zolang i kleiner is dan timeseries
             {
                 while (bucketIsGood && index < testBuckets.Count)//Als de bool true is en index kleiner is dan de hoeveelheid testen
                 {
-                    bucketIsGood = testBuckets[index].PerformTestBucket(TimeSeries.TimeSeries[i]);//bool is gelijk aan de uitkomst van de test op de bucket
+                    bucketIsGood = testBuckets[index].PerformTestBucket(TimeSeries.TimeSeries[_lineIndex]);//bool is gelijk aan de uitkomst van de test op de bucket
                     index++;
                 }
                 if (!bucketIsGood)//Als de bucket niet goed is
                 {
-                    MessageBox.Show(testBuckets[i].ErrorMessage + " Lijn: " + i);//Toon de plaats waar de error zich bevind
-                    i = int.MaxValue - 1;
+                    MessageBox.Show(testBuckets[_lineIndex].ErrorMessage + " Lijn: " + _lineIndex);//Toon de plaats waar de error zich bevind
+                    _lineIndex = int.MaxValue - 1;
                 }
             }
         }
@@ -113,7 +114,24 @@ namespace TimeSeries
             while (formatIsGood && index < tests.Count)
             {
                 formatIsGood = tests[index].PerformTest(words);
-                index++;
+                
+                if (formatIsGood)
+                {
+                    string startDate = words[0];
+                    string endDate = words[1];
+                    string strValue = words[2];
+                    Bucket bucket = CreateBucket(startDate, endDate, strValue);
+                    this.TimeSeries.Add(bucket);
+                    index++;
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show(tests[index].ErrorMessage + "\tlijn " + (_lineIndex + 1));
+                    this._lineIndex = int.MaxValue - 1;// dit zorgt ervoor dat wanneer er een test faalt de loop eindigt 
+                                                       //kan enkel problemen geven wanneer je een file hebt van dezelfde lengte
+                                                       // is een beetje een lange file
+                                                       //throw new test[index].Exception();
+                }
 
             }
             /*
@@ -125,25 +143,6 @@ namespace TimeSeries
              * anders gooien we een exception
              * 
              */
-            if (formatIsGood)
-            {
-                string startDate = words[0];
-                string endDate = words[1];
-                string strValue = words[2];
-                Bucket bucket = CreateBucket(startDate, endDate, strValue);
-                this.TimeSeries.Add(bucket);
-            }
-            else
-            {
-                System.Windows.Forms.MessageBox.Show(tests[index].ErrorMessage + "\tlijn " + (_lineIndex +1));
-                this._lineIndex = int.MaxValue -1;// dit zorgt ervoor dat wanneer er een test faalt de loop eindigt 
-                //kan enkel problemen geven wanneer je een file hebt van dezelfde lengte
-                // is een beetje een lange file
-                //throw new test[index].Exception();
-            }
-
-
-
         }
 
         public void SplitWordsTitleRow(string aLine, List<TS_ITestFileFormat> headerTests)
@@ -187,9 +186,9 @@ namespace TimeSeries
             //doen we hier zo kan ook anders maar geeft ons wat mooiere code
             try
             {
-                //DateTime dtStartDate = DateTime.Parse(startDate);
-                //DateTime dtEndDate = DateTime.Parse(endDate);
-                return Bucket.GetBucket(startDate, endDate, value);
+                DateTime dtStartDate = DateTime.Parse(startDate);
+                DateTime dtEndDate = DateTime.Parse(endDate);
+                return Bucket.GetBucket(dtStartDate, dtEndDate, value);
             }
             catch
             {
