@@ -8,7 +8,7 @@ namespace TimeSeries
 {
     public class TXT_CSVfile : TS_IFile
     {
-        private int i = 1;
+        private int _lineIndex = 1;
         private BucketList TimeSeries = new BucketList();
 
         public FileInfo TheFile { get; set; }
@@ -43,8 +43,9 @@ namespace TimeSeries
             string[] fileInput = File.ReadLines(TheFile.FullName).ToArray();
 
             SplitWordsTitleRow(fileInput[0],testsHeader);
-            for(; i < fileInput.Length; i++)
+            for(; _lineIndex < fileInput.Length; _lineIndex++)
             {
+                #region Vorige Oplossing
                 //if (i<1)
                 //{
                 //    //dit test ook op TS12: Er is geen titelrij
@@ -63,10 +64,11 @@ namespace TimeSeries
 
                 //Program.application.output.Items.Add(fileInput[i]);
                 //else
-                //{
+                //{ 
+                #endregion
 
-                SplitWords(fileInput[i], tests);
-                Program.application.output.Items.Add("Checks gedaan voor " + i);
+                SplitWords(fileInput[_lineIndex], tests);
+                Program.application.output.Items.Add("Checks gedaan voor " + _lineIndex);
 
 
                 //}
@@ -107,8 +109,10 @@ namespace TimeSeries
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show(tests[index].ErrorMessage + "\tlijn " + (i +1));
-                this.i = int.MaxValue -1;
+                System.Windows.Forms.MessageBox.Show(tests[index].ErrorMessage + "\tlijn " + (_lineIndex +1));
+                this._lineIndex = int.MaxValue -1;// dit zorgt ervoor dat wanneer er een test faalt de loop eindigt 
+                //kan enkel problemen geven wanneer je een file hebt van dezelfde lengte
+                // is een beetje een lange file
                 //throw new test[index].Exception();
             }
 
@@ -118,19 +122,20 @@ namespace TimeSeries
 
         public void SplitWordsTitleRow(string aLine, List<TS_ITestFileFormat> headerTests)
         {
-            string[] titleWords = aLine.Split(';');
+            string[] words = aLine.Split(';');
 
             int index = 0;
             bool formatIsGood = true;
             while (formatIsGood && index < headerTests.Count)
             {
-                formatIsGood = headerTests[index].PerformTest(titleWords);
+                //werkt hetzelfde als de SpitWords Maar bevat meer tests zoals test 12 die test op de titelrij zelf.
+                formatIsGood = headerTests[index].PerformTest(words);
 
                 if (formatIsGood)
                 {
-                    string startDateTitle = titleWords[0];
-                    string endDateTitle = titleWords[1];
-                    string valueTitle = titleWords[2];
+                    string startDateTitle = words[0];
+                    string endDateTitle = words[1];
+                    string valueTitle = words[2];
 
                     //Try to create a new titleBucket
                     this.TimeSeries.TitleBucket = new TitleBucket(startDateTitle, endDateTitle, valueTitle);
@@ -139,8 +144,8 @@ namespace TimeSeries
 
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show(headerTests[index].ErrorMessage + "\tlijn " + i);
-                    this.i = int.MaxValue - 1;
+                    System.Windows.Forms.MessageBox.Show(headerTests[index].ErrorMessage + "\tlijn " + _lineIndex);
+                    this._lineIndex = int.MaxValue - 1;
                     //throw new test[index].Exception();
                 }
                 index++;
