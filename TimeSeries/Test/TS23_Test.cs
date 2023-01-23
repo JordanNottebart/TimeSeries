@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TimeSeries
 {
-    class TS23_Test : TS_ITestBucket
+    class TS23_Test : TS_ITestBucked
     {
         public bool PerformTestBucket(Bucket bucket)
         {
