@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TimeSeries.Test
+namespace TimeSeries
 {
-    class TS19_Test : TS_ITestBucket
+    class TS19_Test : TS_ITestBucked
     {
         public bool PerformTestBucket(Bucket bucket)
         {
