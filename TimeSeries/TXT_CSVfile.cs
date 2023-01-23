@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Linq;
 using TimeSeries.Test;
-using System.Reflection;
 
 namespace TimeSeries
 {
@@ -40,7 +38,7 @@ namespace TimeSeries
             Program.application.output.Items.Clear();
             string[] fileInput = File.ReadLines(TheFile.FullName).ToArray();
 
-            //SplitWordsTitleRow(fileInput[0]);
+            SplitWordsTitleRow(fileInput[0],testsHeader, 1 );
             for (int i = 1; i < fileInput.Length; i++)
             {
                 //if (i<1)
@@ -104,7 +102,7 @@ namespace TimeSeries
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show(tests[index].ErrorMessage + j);
+                System.Windows.Forms.MessageBox.Show(tests[index].ErrorMessage + "\tlijn " + j);
                 //throw new test[index].Exception();
             }
 
@@ -116,14 +114,31 @@ namespace TimeSeries
         {
             string[] titleWords = aLine.Split(';');
 
-            string startDateTitle = titleWords[0];
-            string endDateTitle = titleWords[1];
-            string valueTitle = titleWords[2];
+            int index = 0;
+            bool formatIsGood = true;
+            while (formatIsGood && index < headerTests.Count)
+            {
+                formatIsGood = headerTests[index].PerformTest(titleWords);
+                index++;
 
-            //Try to create a new titleBucket
-            TitleBucket theTitleBucket = new TitleBucket(startDateTitle, endDateTitle, valueTitle);
-            // Moeten hier dan de testen op de titelrij (13 t.e.m. 16)? - Jordan
+            }
 
+            if (formatIsGood)
+            {
+                string startDateTitle = titleWords[0];
+                string endDateTitle = titleWords[1];
+                string valueTitle = titleWords[2];
+
+                //Try to create a new titleBucket
+                TitleBucket theTitleBucket = new TitleBucket(startDateTitle, endDateTitle, valueTitle);
+
+            }            // Moeten hier dan de testen op de titelrij (13 t.e.m. 16)? - Jordan
+
+            else
+            {
+                System.Windows.Forms.MessageBox.Show(headerTests[index].ErrorMessage + "\tlijn " + j);
+                //throw new test[index].Exception();
+            }
 
 
         }
