@@ -148,9 +148,9 @@ namespace TimeSeries
 
             try
             {
-                DateTime dtStartDate = DateTime.Parse(startDate);
-                DateTime dtEndDate = DateTime.Parse(endDate);
-                return Bucket.GetBucket(dtStartDate, dtEndDate, value);
+                //DateTime dtStartDate = DateTime.Parse(startDate);
+                //DateTime dtEndDate = DateTime.Parse(endDate);
+                return Bucket.GetBucket(startDate, endDate, value);
             }
             catch
             {
