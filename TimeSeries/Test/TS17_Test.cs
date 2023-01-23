@@ -8,11 +8,11 @@ namespace TimeSeries.Test
     {
         public bool PerformTest(string[] splitstring)
         {
+            ErrorMessage = " file bevat geen data";
             bool testOk = true;
             if (splitstring.Length <= 1)//Als de array kleiner of gelijk aan 1 is
             {
                 testOk = false;
-                ErrorMessage = " file bevat geen data";
             }
             return testOk;
         }

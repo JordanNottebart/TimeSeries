@@ -8,11 +8,11 @@ namespace TimeSeries.Test
     {
         public bool PerformTestBucket(Bucket bucket)
         {
+            ErrorMessage = " Titel is leeg";
             bool testOk = true;
             if(bucket.bucketValue == "")//Als titel leeg is
             {
                 testOk = false;
-                ErrorMessage = " Titel is leeg";
             }
             return testOk;
         }

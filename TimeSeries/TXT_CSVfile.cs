@@ -20,7 +20,6 @@ namespace TimeSeries
 
         public void ReadFile()
         {
-            string errorMessage = "";
             List<TS_ITestFileFormat> tests = new List<TS_ITestFileFormat>();
             List<TS_ITestFileFormat> testsHeader = new List<TS_ITestFileFormat>();
             #region MakeTests
@@ -41,7 +40,7 @@ namespace TimeSeries
             Program.application.output.Items.Clear();
             string[] fileInput = File.ReadLines(TheFile.FullName).ToArray();
 
-            SplitWordsTitleRow(fileInput[0]);
+            //SplitWordsTitleRow(fileInput[0]);
             for (int i = 1; i < fileInput.Length; i++)
             {
                 //if (i<1)
@@ -64,7 +63,7 @@ namespace TimeSeries
                 //else
                 //{
 
-                SplitWords(fileInput[i], tests, i);
+                SplitWords(fileInput[i], tests, i + 1);
                 Program.application.output.Items.Add("Checks gedaan voor " + i);
 
 
@@ -113,7 +112,7 @@ namespace TimeSeries
 
         }
 
-        public void SplitWordsTitleRow(string aLine)
+        public void SplitWordsTitleRow(string aLine, List<TS_ITestFileFormat> headerTests, int j)
         {
             string[] titleWords = aLine.Split(';');
 
@@ -122,15 +121,10 @@ namespace TimeSeries
             string valueTitle = titleWords[2];
 
             //Try to create a new titleBucket
-            try
-            {
-                TitleBucket theTitleBucket = new TitleBucket(startDateTitle, endDateTitle, valueTitle);
-                // Moeten hier dan de testen op de titelrij (13 t.e.m. 16)? - Jordan
-            }
-            catch
-            {
-                //Error message that show that there is no titlerow
-            }
+            TitleBucket theTitleBucket = new TitleBucket(startDateTitle, endDateTitle, valueTitle);
+            // Moeten hier dan de testen op de titelrij (13 t.e.m. 16)? - Jordan
+
+
 
         }
 

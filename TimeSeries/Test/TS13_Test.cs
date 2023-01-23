@@ -10,12 +10,13 @@ namespace TimeSeries
 
         public bool PerformTest(string[] titleRow)
         {
+
+            ErrorMessage = "Titel van de eerste kolom is niet start";
             // Check if the title of the first column in the title row is "start" (case insensitive)
             if (titleRow[0].ToLower() == "start")
             {
                 return true;
             }
-            ErrorMessage = "Titel van de eerste kolom is niet start";
             return false;
         }
     }

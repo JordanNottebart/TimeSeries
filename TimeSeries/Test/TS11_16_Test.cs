@@ -10,10 +10,11 @@ namespace TimeSeries
 
         public bool PerformTest(string[] splitstring)
         {
+            ErrorMessage = " Er is geen 3de kolom";
             if (splitstring.Length != 3)
             {
                 return false;
-                ErrorMessage = " Er is geen 3de kolom";
+
             }
 
             return true;
