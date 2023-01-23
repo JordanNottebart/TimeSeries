@@ -115,6 +115,22 @@ namespace TimeSeries
 
         public void SplitWordsTitleRow(string aLine)
         {
+            string[] titleWords = aLine.Split(';');
+
+            string startDateTitle = titleWords[0];
+            string endDateTitle = titleWords[1];
+            string valueTitle = titleWords[2];
+
+            //Try to create a new titleBucket
+            try
+            {
+                TitleBucket theTitleBucket = new TitleBucket(startDateTitle, endDateTitle, valueTitle);
+                // Moeten hier dan de testen op de titelrij (13 t.e.m. 16)? - Jordan
+            }
+            catch
+            {
+                //Error message that show that there is no titlerow
+            }
 
         }
 
