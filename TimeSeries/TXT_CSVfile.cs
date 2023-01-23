@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 using TimeSeries.Test;
 
 namespace TimeSeries
@@ -42,8 +43,8 @@ namespace TimeSeries
             Program.application.output.Items.Clear();
             string[] fileInput = File.ReadLines(TheFile.FullName).ToArray();
 
-            SplitWordsTitleRow(fileInput[0],testsHeader);
-            for(; i < fileInput.Length; i++)
+            SplitWordsTitleRow(fileInput[0], testsHeader);
+            for (; i < fileInput.Length; i++)
             {
                 //if (i<1)
                 //{
@@ -66,11 +67,39 @@ namespace TimeSeries
                 //{
 
                 SplitWords(fileInput[i], tests);
-                Program.application.output.Items.Add("Checks gedaan voor " + i);
+                //Program.application.output.Items.Add("Checks gedaan voor " + i);
 
 
                 //}
 
+            }
+            if (TimeSeries.TimeSeries.Count == fileInput.Length - 1)
+            {
+                CheckAllBuckets();
+            }
+
+        }
+
+        public void CheckAllBuckets()//Method om buckets te checken
+        {
+            List<TS_ITestBucket> testBuckets = new List<TS_ITestBucket>();//Maak een lijst
+            TS_ITestBucket test18 = new TS18_Test();//Maak de test aan
+            testBuckets.Add(test18);//voeg de testen toe
+            i = 0;
+            int index = 0;
+            bool bucketIsGood = true;
+            for (; i < TimeSeries.TimeSeries.Count; i++)//Zolang i kleiner is dan timeseries
+            {
+                while (bucketIsGood && index < testBuckets.Count)//Als de bool true is en index kleiner is dan de hoeveelheid testen
+                {
+                    bucketIsGood = testBuckets[index].PerformTestBucket(TimeSeries.TimeSeries[i]);//bool is gelijk aan de uitkomst van de test op de bucket
+                    index++;
+                }
+                if (!bucketIsGood)//Als de bucket niet goed is
+                {
+                    MessageBox.Show(testBuckets[i].ErrorMessage + " Lijn: " + i);//Toon de plaats waar de error zich bevind
+                    i = int.MaxValue - 1;
+                }
             }
         }
 
@@ -107,8 +136,8 @@ namespace TimeSeries
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show(tests[index].ErrorMessage + "\tlijn " + (i +1));
-                this.i = int.MaxValue -1;
+                System.Windows.Forms.MessageBox.Show(tests[index].ErrorMessage + " lijn: " + (i + 1));
+                this.i = int.MaxValue - 1;
                 //throw new test[index].Exception();
             }
 
