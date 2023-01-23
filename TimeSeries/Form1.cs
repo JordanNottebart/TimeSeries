@@ -44,13 +44,6 @@ namespace TimeSeries
                 }
             }
         }
-
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void openFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog explorer = new OpenFileDialog();//Maakt een verkenner window aan
@@ -60,16 +53,6 @@ namespace TimeSeries
             {
                 pathofthefile.Text = explorer.FileName;//Zet de path naar de label
             }
-
-        }
-
-        private void Form1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_DoubleClick(object sender, EventArgs e)
-        {
 
         }
 

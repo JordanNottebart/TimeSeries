@@ -29,8 +29,6 @@ namespace TimeSeries
             TS_ITestFileFormat test12 = new TS12_Test();
             TS_ITestFileFormat test17 = new TS17_Test();
             tests.Add(test11_16);
-            //tests.Add(test13);
-            //tests.Add(test14);
             tests.Add(test17);
             testsHeader.Add(test12);
             testsHeader.AddRange(tests);
@@ -140,7 +138,7 @@ namespace TimeSeries
                     //Try to create a new titleBucket
                     this.TimeSeries.TitleBucket = new TitleBucket(startDateTitle, endDateTitle, valueTitle);
 
-                }            // Moeten hier dan de testen op de titelrij (13 t.e.m. 16)? - Jordan
+                }
 
                 else
                 {
@@ -158,7 +156,7 @@ namespace TimeSeries
 
         public Bucket CreateBucket(string startDate, string endDate, string value)
         {
-
+            //doen we hier zo kan ook anders maar geeft ons wat mooiere code
             try
             {
                 DateTime dtStartDate = DateTime.Parse(startDate);
