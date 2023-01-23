@@ -6,6 +6,8 @@ namespace TimeSeries
 {
     public class TS13_Test : TS_ITestFileFormat
     {
+        public string ErrorMessage { get ; set ; }
+
         public bool PerformTest(string[] titleRow)
         {
             // Check if the title of the first column in the title row is "start" (case insensitive)
@@ -13,7 +15,7 @@ namespace TimeSeries
             {
                 return true;
             }
-
+            ErrorMessage = "Titel van de eerste kolom is niet start";
             return false;
         }
     }

@@ -20,8 +20,9 @@ namespace TimeSeries
 
         public void ReadFile()
         {
-
+            string errorMessage = "";
             List<TS_ITestFileFormat> tests = new List<TS_ITestFileFormat>();
+            List<TS_ITestFileFormat> testsHeader = new List<TS_ITestFileFormat>();
             #region MakeTests
             TS_ITestFileFormat test11_16 = new TS11_16_Test();
             TS_ITestFileFormat test13 = new TS13_Test();
@@ -31,7 +32,6 @@ namespace TimeSeries
             //tests.Add(test13);
             //tests.Add(test14);
             tests.Add(test17);
-            List<TS_ITestFileFormat> testsHeader = new List<TS_ITestFileFormat>();
             testsHeader.AddRange(tests);
             testsHeader.Add(test13);
             testsHeader.Add(test14);
@@ -41,45 +41,39 @@ namespace TimeSeries
             Program.application.output.Items.Clear();
             string[] fileInput = File.ReadLines(TheFile.FullName).ToArray();
 
-            for (int i = 0; i < fileInput.Length; i++)
+            SplitWordsTitleRow(fileInput[0]);
+            for (int i = 1; i < fileInput.Length; i++)
             {
-                if (i<1)
-                {
-                    //dit test ook op TS12: Er is geen titelrij
+                //if (i<1)
+                //{
+                //    //dit test ook op TS12: Er is geen titelrij
 
-                    try
-                    {
-                        SplitWords(fileInput[i], testsHeader);
-                        Program.application.output.Items.Add("Checks gedaan voor " + i);
-                    }
-                    catch (Exception e)
-                    {
-                        System.Windows.Forms.MessageBox.Show(e.Message + i);
-                        i = fileInput.Length;
-                    }
-                }
+                //    try
+                //    {
+                //        SplitWords(fileInput[i], testsHeader);
+                //        Program.application.output.Items.Add("Checks gedaan voor " + i);
+                //    }
+                //    catch (Exception e)
+                //    {
+                //        System.Windows.Forms.MessageBox.Show(e.Message + i);
+                //        i = fileInput.Length;
+                //    }
+                //}
 
                 //Program.application.output.Items.Add(fileInput[i]);
-                else
-                {
-                    try
-                    {
-                        SplitWords(fileInput[i], tests);
-                        Program.application.output.Items.Add("Checks gedaan voor " + i);
-                    }
-                    catch (Exception e)
-                    {
-                        System.Windows.Forms.MessageBox.Show(e.Message + i);
-                        i = fileInput.Length;
-                    }
-                }
+                //else
+                //{
+
+                SplitWords(fileInput[i], tests, i);
+                Program.application.output.Items.Add("Checks gedaan voor " + i);
 
 
+                //}
 
             }
         }
 
-        public void SplitWords(string aLine, List<TS_ITestFileFormat> tests)
+        public void SplitWords(string aLine, List<TS_ITestFileFormat> tests, int j)
         {
             string[] words = aLine.Split(';');
             //hier format test
@@ -107,12 +101,11 @@ namespace TimeSeries
                 string startDate = words[0];
                 string endDate = words[1];
                 string strValue = words[2];
-
                 Bucket bucket = CreateBucket(startDate, endDate, strValue);
             }
             else
             {
-                throw new Exception();
+                System.Windows.Forms.MessageBox.Show(tests[index].ErrorMessage + j);
                 //throw new test[index].Exception();
             }
 
