@@ -6,11 +6,11 @@ namespace TimeSeries
 {
     public struct Bucket//Struct
     {
-        public DateTime startDate;
-        public DateTime? endDate;        //Variabelen
-        public string bucketValue;
+        public string startDate;
+        public string? endDate;        //Variabelen
+        public object bucketValue;
 
-        public static Bucket GetBucket(DateTime startDateLine, DateTime? endDateLine, string value)
+        public static Bucket GetBucket(string startDateLine, string? endDateLine, object value)
         {
             Bucket bucket = new Bucket();
             bucket.startDate = startDateLine;

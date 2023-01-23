@@ -72,6 +72,34 @@ namespace TimeSeries
                 //}
 
             }
+            if (TimeSeries.TimeSeries.Count == fileInput.Length - 1)
+            {
+                CheckAllBuckets();
+            }
+
+        }
+
+        public void CheckAllBuckets()//Method om buckets te checken
+        {
+            List<TS_ITestBucket> testBuckets = new List<TS_ITestBucket>();//Maak een lijst
+            TS_ITestBucket test18 = new TS18_Test();//Maak de test aan
+            testBuckets.Add(test18);//voeg de testen toe
+            i = 0;
+            int index = 0;
+            bool bucketIsGood = true;
+            for (; i < TimeSeries.TimeSeries.Count; i++)//Zolang i kleiner is dan timeseries
+            {
+                while (bucketIsGood && index < testBuckets.Count)//Als de bool true is en index kleiner is dan de hoeveelheid testen
+                {
+                    bucketIsGood = testBuckets[index].PerformTestBucket(TimeSeries.TimeSeries[i]);//bool is gelijk aan de uitkomst van de test op de bucket
+                    index++;
+                }
+                if (!bucketIsGood)//Als de bucket niet goed is
+                {
+                    MessageBox.Show(testBuckets[i].ErrorMessage + " Lijn: " + i);//Toon de plaats waar de error zich bevind
+                    i = int.MaxValue - 1;
+                }
+            }
         }
 
         public void SplitWords(string aLine, List<TS_ITestFileFormat> tests)
@@ -159,9 +187,9 @@ namespace TimeSeries
             //doen we hier zo kan ook anders maar geeft ons wat mooiere code
             try
             {
-                DateTime dtStartDate = DateTime.Parse(startDate);
-                DateTime dtEndDate = DateTime.Parse(endDate);
-                return Bucket.GetBucket(dtStartDate, dtEndDate, value);
+                //DateTime dtStartDate = DateTime.Parse(startDate);
+                //DateTime dtEndDate = DateTime.Parse(endDate);
+                return Bucket.GetBucket(startDate, endDate, value);
             }
             catch
             {
