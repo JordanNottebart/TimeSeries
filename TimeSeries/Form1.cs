@@ -44,6 +44,7 @@ namespace TimeSeries
                 }
             }
         }
+
         private void openFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog explorer = new OpenFileDialog();//Maakt een verkenner window aan
@@ -58,27 +59,39 @@ namespace TimeSeries
 
         private void btn_ExecuteRead_Click(object sender, EventArgs e)
         {
-
-            FileInfo theFile = new FileInfo(pathofthefile.Text);
-
-            if (theFile.Exists)
+            // If the filepath is not empty
+            if (pathofthefile.Text != "")
             {
-                TS_IFile tS_IFile;
-                if (theFile.Extension == ".txt" || theFile.Extension == ".csv")
-                {
-                    tS_IFile = new TXT_CSVfile(theFile);
+                FileInfo theFile = new FileInfo(pathofthefile.Text);
 
+                // If the file exists
+                if (theFile.Exists)
+                {
+                    TS_IFile tS_IFile;
+
+                    // If the file has a .txt or .csv extension
+                    if (theFile.Extension == ".txt" || theFile.Extension == ".csv")
+                    {
+                        tS_IFile = new TXT_CSVfile(theFile);
+                    }
+                    else
+                    {
+                        tS_IFile = new XLS_XLSXfile(theFile);
+                    }
+
+                    // Read the file
+                    tS_IFile.ReadFile();
                 }
+                // If the file does not exist
                 else
                 {
-                    tS_IFile = new XLS_XLSXfile(theFile);
-
+                    output.Items.Add("Error 404 file not found");
                 }
-                tS_IFile.ReadFile();
             }
+            // If the filepath is empty
             else
             {
-                output.Items.Add("Error 404 file not found");
+                MessageBox.Show("No file selected.");
             }
 
         }
