@@ -44,6 +44,7 @@ namespace TimeSeries
                 }
             }
         }
+
         private void openFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog explorer = new OpenFileDialog();//Maakt een verkenner window aan
