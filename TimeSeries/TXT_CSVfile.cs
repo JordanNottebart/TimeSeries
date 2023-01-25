@@ -51,10 +51,6 @@ namespace TimeSeries
 
             if (test17.PerformTest(fileInput))
 
-            SplitWordsTitleRow(fileInput[0], testsHeader);
-            for (; _lineIndex < fileInput.Length; _lineIndex++)
-
-            {
                 SplitWordsTitleRow(fileInput[0], testsHeader);
                 for (; _lineIndex < fileInput.Length; _lineIndex++)
                 {
@@ -91,7 +87,7 @@ namespace TimeSeries
                 {
                     CheckAllBuckets();
                 } 
-            }
+            
             else
             {
                 MessageBox.Show(test17.ErrorMessage);

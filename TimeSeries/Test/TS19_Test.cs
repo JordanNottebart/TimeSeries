@@ -10,6 +10,7 @@ namespace TimeSeries
         public bool PerformTestBucket(Bucket bucket)
         {
             // Variables
+            ErrorMessage = "Date does not exist";
             DateTime dateLowerLimit = new DateTime(0001, 01, 01, 0, 0, 0);
             DateTime dateUpperLimit = new DateTime(9999, 12, 31, 23, 59, 59);
 
