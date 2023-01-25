@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace TimeSeries
 {
@@ -30,7 +31,7 @@ namespace TimeSeries
             tests.Add(test11_16);
             //tests.Add(test13);
             //tests.Add(test14);
-            tests.Add(test17);
+            //tests.Add(test17);
             testsHeader.Add(test12);
             testsHeader.AddRange(tests);
             testsHeader.Add(test13);
@@ -41,35 +42,46 @@ namespace TimeSeries
             Program.application.output.Items.Clear();
             string[] fileInput = File.ReadLines(TheFile.FullName).ToArray();
 
-            SplitWordsTitleRow(fileInput[0],testsHeader);
-            for(; i < fileInput.Length; i++)
+
+            if (test17.PerformTest(fileInput))
             {
-                //if (i<1)
-                //{
-                //    //dit test ook op TS12: Er is geen titelrij
+                SplitWordsTitleRow(fileInput[0], testsHeader);
+                for (; i < fileInput.Length; i++)
+                {
+                    #region old way of working
+                    //if (i<1)
+                    //{
+                    //    //dit test ook op TS12: Er is geen titelrij
 
-                //    try
-                //    {
-                //        SplitWords(fileInput[i], testsHeader);
-                //        Program.application.output.Items.Add("Checks gedaan voor " + i);
-                //    }
-                //    catch (Exception e)
-                //    {
-                //        System.Windows.Forms.MessageBox.Show(e.Message + i);
-                //        i = fileInput.Length;
-                //    }
-                //}
+                    //    try
+                    //    {
+                    //        SplitWords(fileInput[i], testsHeader);
+                    //        Program.application.output.Items.Add("Checks gedaan voor " + i);
+                    //    }
+                    //    catch (Exception e)
+                    //    {
+                    //        System.Windows.Forms.MessageBox.Show(e.Message + i);
+                    //        i = fileInput.Length;
+                    //    }
+                    //}
 
-                //Program.application.output.Items.Add(fileInput[i]);
-                //else
-                //{
+                    //Program.application.output.Items.Add(fileInput[i]);
+                    //else
+                    //{ 
+                    #endregion
 
-                SplitWords(fileInput[i], tests);
-                Program.application.output.Items.Add("Checks gedaan voor " + i);
+                    SplitWords(fileInput[i], tests);
+                    Program.application.output.Items.Add("Checks gedaan voor " + i);
 
 
-                //}
+                    //}
 
+                } 
+            }
+            else
+            {
+
+                System.Windows.Forms.MessageBox.Show(test17.ErrorMessage);
             }
         }
 
