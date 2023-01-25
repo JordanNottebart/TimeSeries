@@ -29,6 +29,7 @@ namespace TimeSeries
             TS_ITestFileFormat test12 = new TS12_Test();
             TS_ITestFileFormat test17 = new TS17_Test();
             TS_ITestFileFormat test18 = new TS18_Test();
+            TS_ITestFileFormat test15 = new TS15_Test();
             tests.Add(test11_16);
             //tests.Add(test13);
             //tests.Add(test14);
@@ -37,15 +38,22 @@ namespace TimeSeries
             testsHeader.AddRange(tests);
             testsHeader.Add(test13);
             testsHeader.Add(test14);
+            testsHeader.Add(test15);
+            tests.Add(test17);
             tests.Add(test18);
-            
+
 
             #endregion
 
             Program.application.output.Items.Clear();
             string[] fileInput = File.ReadLines(TheFile.FullName).ToArray();
 
+
             if (test17.PerformTest(fileInput))
+
+            SplitWordsTitleRow(fileInput[0], testsHeader);
+            for (; _lineIndex < fileInput.Length; _lineIndex++)
+
             {
                 SplitWordsTitleRow(fileInput[0], testsHeader);
                 for (; _lineIndex < fileInput.Length; _lineIndex++)
@@ -123,7 +131,7 @@ namespace TimeSeries
             while (formatIsGood && index < tests.Count)
             {
                 formatIsGood = tests[index].PerformTest(words);
-                
+
                 if (formatIsGood)
                 {
                     string startDate = words[0];
@@ -135,7 +143,7 @@ namespace TimeSeries
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show(tests[index].ErrorMessage + "\tlijn " + (_lineIndex + 1));
+                    System.Windows.Forms.MessageBox.Show(tests[index].ErrorMessage + "lijn: " + (_lineIndex + 1));
                     this._lineIndex = int.MaxValue - 1;// dit zorgt ervoor dat wanneer er een test faalt de loop eindigt 
                                                        //kan enkel problemen geven wanneer je een file hebt van dezelfde lengte
                                                        // is een beetje een lange file
@@ -178,7 +186,7 @@ namespace TimeSeries
 
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show(headerTests[index].ErrorMessage + "\tlijn " + _lineIndex);
+                    System.Windows.Forms.MessageBox.Show(headerTests[index].ErrorMessage + " lijn: " + _lineIndex);
                     this._lineIndex = int.MaxValue - 1;
                     //throw new test[index].Exception();
                 }
