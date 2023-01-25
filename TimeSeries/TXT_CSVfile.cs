@@ -39,7 +39,7 @@ namespace TimeSeries
             testsHeader.Add(test13);
             testsHeader.Add(test14);
             testsHeader.Add(test15);
-            tests.Add(test17);
+            //tests.Add(test17);
             tests.Add(test18);
 
 
@@ -50,6 +50,9 @@ namespace TimeSeries
 
 
             if (test17.PerformTest(fileInput))
+            {
+
+
 
                 SplitWordsTitleRow(fileInput[0], testsHeader);
                 for (; _lineIndex < fileInput.Length; _lineIndex++)
@@ -86,8 +89,10 @@ namespace TimeSeries
                 if (TimeSeries.TimeSeries.Count == fileInput.Length - 1)
                 {
                     CheckAllBuckets();
-                } 
-            
+                }
+            }
+
+
             else
             {
                 MessageBox.Show(test17.ErrorMessage);
