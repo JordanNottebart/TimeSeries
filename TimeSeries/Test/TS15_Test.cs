@@ -4,13 +4,13 @@ using System.Text;
 
 namespace TimeSeries
 {
-    class TS15_Test : TS_ITestBucked
+    class TS15_Test : TS_ITestFileFormat
     {
-        public bool PerformTestBucket(Bucket bucket)
+        public bool PerformTest(string[] splitstring)
         {
-            ErrorMessage = " Titel is leeg";
+            ErrorMessage = " Titel derde kolom is leeg";
             bool testOk = true;
-            if(bucket.bucketValue == "")//Als titel leeg is
+            if (splitstring[2] == "")//Als titel leeg is
             {
                 testOk = false;
             }
