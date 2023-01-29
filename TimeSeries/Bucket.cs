@@ -8,9 +8,9 @@ namespace TimeSeries
     {
         public DateTime startDate;
         public DateTime? endDate;        //Variabelen
-        public string bucketValue;
+        public object bucketValue;
 
-        public static Bucket GetBucket(DateTime startDateLine, DateTime? endDateLine, string value)
+        public static Bucket GetBucket(DateTime startDateLine, DateTime? endDateLine, object value)
         {
             Bucket bucket = new Bucket();
             bucket.startDate = startDateLine;

@@ -7,6 +7,7 @@ namespace TimeSeries
     public interface TS_ITestBucked
         //Interface om buckets te testen
     {
+        public string ErrorMessage { get; set; }
         public bool PerformTestBucket(Bucket bucket);
     }
 }
