@@ -11,7 +11,7 @@ namespace TimeSeries
         public string titleEndDate;        
         public string titleBucketValue;
 
-        public TitleBucket(string startDateLine, string endDateLine, string value)
+        public TitleBucket(string startDateLine, string endDateLine, string value)//Constructor
         {
             this.titleStartDate = startDateLine;
             this.titleEndDate = endDateLine;

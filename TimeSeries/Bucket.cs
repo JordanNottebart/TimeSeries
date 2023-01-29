@@ -10,7 +10,7 @@ namespace TimeSeries
         public DateTime? endDate;        //Variabelen
         public object bucketValue;
 
-        public static Bucket GetBucket(DateTime startDateLine, DateTime? endDateLine, object value)
+        public static Bucket GetBucket(DateTime startDateLine, DateTime? endDateLine, object value)//Method die een bucket maakt
         {
             Bucket bucket = new Bucket();
             bucket.startDate = startDateLine;

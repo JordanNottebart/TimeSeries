@@ -14,7 +14,7 @@ namespace TimeSeries
             ErrorMessage = "Er bestaat geen titelrij";
             //TimeSeries.TS_ITestFileFormat x = new TS13_Test();
             //TimeSeries.TS_ITestFileFormat y = new TS14_Test();
-            if ((splitstring.Contains("Start") || splitstring.Contains("End")) && splitstring.Length == 3)
+            if ((splitstring.Contains("Start") || splitstring.Contains("End")) && splitstring.Length == 3)//Als de titel start, end en de array 3 groot is
             {
                 return true;
             }

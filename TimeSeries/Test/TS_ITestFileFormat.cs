@@ -4,9 +4,9 @@ using System.Text;
 
 namespace TimeSeries
 {
-    public interface TS_ITestFileFormat
+    public interface TS_ITestFileFormat//Interface
     {
-        public string ErrorMessage { get; set; }
-        public bool PerformTest(string[] splitstring);
+        public string ErrorMessage { get; set; }//Property
+        public bool PerformTest(string[] splitstring);//Method
     }
 }
