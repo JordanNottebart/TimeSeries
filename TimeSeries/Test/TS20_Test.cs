@@ -12,7 +12,7 @@ namespace TimeSeries
         {
             ErrorMessage = "start datum is leeg";
 
-            if (splitstring[0] == "")
+            if (splitstring[0] == "")//Als de eerste waarde in de array een lege string is
             {
                 return false;
             }

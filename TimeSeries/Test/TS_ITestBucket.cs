@@ -4,10 +4,10 @@ using System.Text;
 
 namespace TimeSeries
 {
-    public interface TS_ITestBucked
+    public interface TS_ITestBucket
         //Interface om buckets te testen
     {
-        public string ErrorMessage { get; set; }
-        public bool PerformTestBucket(Bucket bucket);
+        public string ErrorMessage { get; set; }//Property
+        public bool PerformTestBucket(Bucket bucket);//Method
     }
 }

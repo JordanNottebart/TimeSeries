@@ -19,6 +19,7 @@ namespace TimeSeries
             MyExcelApp.Workbook theWorkbook;
             MyExcelApp.Worksheet theWorksheet;
             MyExcelApp.Range theRange;
+            MyExcelApp.Range theCell;
             theExcelApplication = new MyExcelApp.Application();   // Make a new excel application
 
             theExcelApplication.Visible = true;   // Show the excel file or not
@@ -28,15 +29,15 @@ namespace TimeSeries
             List<string> fileInput = new List<string>();
             for (int RowCounter = 1; RowCounter <= theRange.Rows.Count; RowCounter++)   // Show the value of each used cell, row after row
             {
-                string[] rowsInput = new string[3];
-                //for (int ColumnCounter = 1; ColumnCounter <= theRange.Columns.Count; ColumnCounter++)
-                //{
-                //    theCell = theRange.Cells[RowCounter, ColumnCounter];
+                for (int ColumnCounter = 1; ColumnCounter <= theRange.Columns.Count; ColumnCounter++)
+                {
+                    theCell = theRange.Cells[RowCounter, ColumnCounter];
 
-                //}
-                rowsInput[0] = theRange.Rows[RowCounter, 1].Value;
-                rowsInput[1] = theRange.Rows[RowCounter, 2].Value;
-                rowsInput[2] = theRange.Rows[RowCounter, 3].Value;
+                }
+                //string[] rowsInput = new string[3];
+                //rowsInput[0] = theRange.Rows[RowCounter, 1].Value2;
+                //rowsInput[1] = theRange.Rows[RowCounter, 2].Value2;
+                //rowsInput[2] = theRange.Rows[RowCounter, 3].Value2;
             }
 
             theExcelApplication.Quit();

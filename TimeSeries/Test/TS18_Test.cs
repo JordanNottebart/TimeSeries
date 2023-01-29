@@ -23,7 +23,7 @@ namespace TimeSeries
                 "yyyy/MM/dd hh:mm:ss",
                 CultureInfo.InvariantCulture,
                 DateTimeStyles.None, out result);
-
+            //Returned een boolean wanneer de startdatum en einddatum in het juiste formaat staan
         }
     }
 }
