@@ -89,6 +89,7 @@ namespace TimeSeries
             this.btn_CheckTimeSeries.TabIndex = 4;
             this.btn_CheckTimeSeries.Text = "check";
             this.btn_CheckTimeSeries.UseVisualStyleBackColor = true;
+            this.btn_CheckTimeSeries.Visible = false;
             this.btn_CheckTimeSeries.Click += new System.EventHandler(this.btn_CheckTimeSeries_Click);
             // 
             // Form1
